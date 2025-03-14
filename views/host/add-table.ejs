@@ -1,0 +1,44 @@
+<%- include('../partials/head') %>
+  </head>
+
+  <body class="bg-gradient-to-br from-orange-50 to-yellow-100">
+    <%- include('../partials/nav') %>
+
+      <div class="container mx-auto p-8 mt-10 max-w-2xl bg-white rounded-lg shadow-md">
+        <h1 class="text-3xl font-semibold mb-6 text-center text-gray-800">
+          Create Table </h1>
+
+        <form action="/host/add-table" method="POST">
+          <div class="mb-4">
+            <label for="tableCode" class="block text-sm font-medium text-gray-700">Table Code</label>
+            <input type="text" id="tableCode" name="tableCode" placeholder="Enter your Table Code"
+              class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+          </div>
+          <div class="mb-4">
+            <label for="tablecapacity" class="block text-sm font-medium text-gray-700">Table Capacity</label>
+            <input type="number" id="tablecapacity" name="tablecapacity" placeholder="Table Capacity"
+              class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+          </div>
+          <div class="mb-4">
+            <label for="Location" class="block text-sm font-medium text-gray-700">Location</label>
+          <input type="text" id="Location" name="Location" placeholder="Location"
+              class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+          </div>
+          <div class="mb-4">
+            <label for="selectbranch" class="block text-sm font-medium text-gray-700">Select Branch</label>
+          <input type="text" id="selectbranch"  name="selectbranch" placeholder="Select Branch"
+              class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+          </div>
+          
+          <div class="text-center">
+            <button
+            type="submit"
+            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-sm transition duration-300">
+            Create Table
+          </button>
+          </div>
+        </form>
+  </body>
+
+  </html>
+

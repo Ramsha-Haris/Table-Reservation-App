@@ -1,0 +1,32 @@
+<%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <main class="container mx-auto p-8 mt-10 max-w-6xl">
+      <h2 class="text-3xl font-semibold text-blue-700 text-center mb-10">Table Management</h2>
+    
+      <section>
+        <h3 class="text-2xl font-semibold text-gray-800 mb-6">Registered Tables</h3>
+    
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <% registeredTables.forEach(home => { %>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200">
+              <div class="p-6">
+                <h4 class="text-xl font-semibold text-gray-900 mb-3">Table: <%= home.tableCode %></h4>
+                <div class="space-y-2">
+                  <p class="text-gray-700"><span class="font-medium">Location:</span> <%= home.Location %></p>
+                  <p class="text-gray-700"><span class="font-medium">Capacity:</span> <%= home.tablecapacity %></p>
+                  <p class="text-gray-700"><span class="font-medium">Branch:</span> <%= home.selectbranch %></p>
+                </div>
+                <div class="mt-4 flex justify-end space-x-2">
+                  <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-sm transition duration-300">Edit</button>
+                  <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md text-sm transition duration-300">Delete</button>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

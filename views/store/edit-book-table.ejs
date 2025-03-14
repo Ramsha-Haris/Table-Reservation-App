@@ -1,0 +1,142 @@
+<%- include('../partials/head') %>
+    </head>
+
+    <body class="bg-gradient-to-r from-gray-100 to-gray-200">
+
+        <%- include('../partials/nav') %>
+            <div class="container mx-auto p-8 mt-10 max-w-2xl bg-white rounded-lg shadow-md">
+                <h1 class="text-3xl font-semibold mb-6 text-center text-gray-800">
+                    <%= editing ? "Edit Table Booking" : "Table Reservation" %>
+                </h1>
+
+                <form action="/store/<%= editing ? 'edit-book-table' : 'book-table'%>" method="POST">
+                    <div class="mb-4">
+                        <label for="bookingNumber" class="block text-sm font-medium text-gray-700">Booking
+                            Number</label>
+                        <input type="text" name="bookingNumber" id="bookingNumber"
+                            value="<%= editing ? booking.bookingNumber : ' ' %>" readonly
+                            class="mt-1 p-2 w-full border rounded-md bg-gray-100" />
+                    </div>
+
+                    <input type="text" name="id" value="<%=editing? booking.id : '' %>" />
+
+                    <div class="mb-4">
+                        <label for="guestName" class="block text-sm font-medium text-gray-700">Guest Name</label>
+                        <input type="text" id="guestName" name="guestName"
+                            value="<%= editing? booking.guestName : '' %>" placeholder="Enter guest name"
+                            class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="guestContactDetails" class="block text-sm font-medium text-gray-700">Contact
+                            Number</label>
+                        <input type="tel" id="guestContactDetails" name="guestContactDetails"
+                            value="<%= editing? booking.guestContactDetails : '' %>" placeholder="+1 (123) 456-7890"
+                            class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="bookingType" class="block text-sm font-medium text-gray-700">Booking Type</label>
+                        <div class="mt-2">
+                            <label class="inline-flex items-center mr-4">
+                                <input type="radio" class="form-radio text-red-500" name="bookingType" value="Walk-in"
+                                    <%=editing && booking.bookingType==='Walk-in' ? 'checked' : '' %>>
+                                <span class="ml-2">Walk-in</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" class="form-radio text-red-500" name="bookingType" value="On Call"
+                                    <%=editing && booking.bookingType==='On Call' ? 'checked' : '' %>>
+                                <span class="ml-2">On Call</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                        <input type="date" id="date" name="date"
+                            value="<%= editing && booking.date ? booking.date.toISOString().split('T')[0] : '' %>"
+                            class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="timeSlot" class="block text-sm font-medium text-gray-700">Time Slot</label>
+                        <select id="timeSlot" name="timeSlot"
+                            class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+                            <option value="">Select Time</option>
+                            <% timeSlot.forEach(time=> { %>
+                                <option value="<%= time %>" <%=editing && booking.timeSlot===time ? 'selected' : '' %>>
+                                    <%= time %>
+                                </option>
+                                <% }); %>
+                        </select>
+                    </div>
+
+
+                    <div class="mb-4">
+                        <label for="bookingDuration" class="block text-sm font-medium text-gray-700">Duration
+                            (Hours)</label>
+                        <input type="number" id="bookingDuration" name="bookingDuration"
+                            value="<%= editing? booking.bookingDuration : '' %>" placeholder="e.g., 2"
+                            class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="CapacityCovers" class="block text-sm font-medium text-gray-700">Number of
+                            Guests</label>
+                        <input type="number" id="CapacityCovers" name="CapacityCovers"
+                            value="<%= editing? booking.CapacityCovers : '' %>" placeholder="e.g., 4" min="1" max="20"
+                            class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700">Select Tables</label>
+                        <div class="mt-2 grid grid-cols-3 gap-2">
+                            <% tables.forEach(table=> { %>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" class="form-checkbox text-red-500" name="tableName[]"
+                                        value="<%= table.tableCode %>" <% if (editing && booking.tableName) { %>
+                                    <% if (booking.tableName.map(String).includes(String(table.tableCode))) { %> checked
+                                        <% } %>
+                                            <% } %>
+                                                />
+                                                <span class="ml-2">Table <%= table.tableCode %></span>
+                                </label>
+                                <% }); %>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="bookingNotes" class="block text-sm font-medium text-gray-700">Reservation
+                            Notes</label>
+                        <textarea id="bookingNotes" name="bookingNotes"
+                            class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500"><%= editing? booking.bookingNotes : '' %></textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700">Reservation Tags</label>
+                        <div class="mt-2 grid grid-cols-3 gap-2">
+                            <% reservationTags.forEach(tag=> { %>
+                                <label class="inline-flex items-center mr-4">
+                                    <input type="checkbox" class="form-checkbox text-red-500" name="reservationTag[]"
+                                        value="<%= tag %>" <% if (editing && booking.reservationTag &&
+                                        booking.reservationTag.includes(tag)) { %> checked <% } %>
+                                        />
+                                        <span class="ml-2">
+                                            <%= tag %>
+                                        </span>
+                                </label>
+                                <% }); %>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit"
+                            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-sm transition duration-300">
+                            <%= editing ? 'Update Table Booking' : 'Book Table' %>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+    </body>
+
+    </html>

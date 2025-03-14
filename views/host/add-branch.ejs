@@ -1,0 +1,38 @@
+<%- include('../partials/head') %>
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+    <main class="container mx-auto mt-8 p-8 bg-white rounded-lg shadow-md">
+      <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Add/Create Branch</h1>
+      <form action="/host/add-branch" method="POST" class="max-w-md mx-auto">
+        <div class="mb-4">
+          <label for="BranchCode" class="block text-sm font-medium text-gray-700">Branch Code</label>
+          <input type="text" id="BranchCode" name="BranchCode" placeholder="Enter your Branch Code"
+            class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+        </div>
+        <div class="mb-4">
+          <label for="BranchName" class="block text-sm font-medium text-gray-700">Branch Name</label>
+          <input type="text" id="BranchName" name="BranchName" placeholder="Enter your Branch Name"
+            class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+        </div>
+        <div class="mb-4">
+          <label for="location" class="block text-sm font-medium text-gray-700">location</label>
+          <input type="text" id="location" name="location" placeholder="Enter location"
+            class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+        </div>
+        <div class="mb-4">
+          <label for="City" class="block text-sm font-medium text-gray-700">City</label>
+          <input type="text" id="City" name="City" placeholder="Enter City"
+            class="mt-1 p-2 w-full border rounded-md focus:ring-red-500 focus:border-red-500">
+        </div>
+          <div class="text-center">
+            <button
+            type="submit"
+            value="Create Branch"
+            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md text-sm transition duration-300">
+            value="Create Branch"
+          </button>
+      </form>
+    </main>
+  </body>
+</html>

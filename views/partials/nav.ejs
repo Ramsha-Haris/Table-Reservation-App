@@ -1,0 +1,88 @@
+<header class="bg-gradient-to-r from-gray-800 to-gray-900 text-gray-200 p-4 shadow-md">
+  <nav class="container mx-auto flex justify-between items-center">
+    <ul class="flex space-x-4">
+      <% if(isLoggedIn) { %>
+      <li>
+        <a href="/bookings" class="py-2 px-4 rounded-md text-sm transition duration-300
+          <%= currentPage === 'bookings' 
+            ? 'bg-blue-500 text-white' 
+            : 'bg-white text-gray-200' 
+          %>
+          hover:bg-blue-600">
+          Bookings
+        </a>
+      </li>
+      <li>
+        <a href="/book-table" class=" py-2 px-4 rounded-md text-sm transition duration-300
+          <%= currentPage === 'bookTable' 
+          ? 'bg-blue-500 text-white' 
+            : 'bg-white text-gray-200' 
+          %>
+          hover:bg-blue-600 hover:text-white">
+          Book Table
+        </a>
+      </li>
+      <span class="text-gray-500 mx-2">|</span>
+      <li>
+        <a href="/host/add-table" class="py-2 px-4 rounded-md text-sm transition duration-300 
+          <%= currentPage === 'addTable' 
+          ? 'bg-blue-500 text-white' 
+            : 'bg-white text-gray-200' 
+          %> 
+          hover:bg-blue-600 hover:text-white">
+          Table Setup</a>
+      </li>
+      <li>
+        <a href="/host/host-table-list" class="py-2 px-4 rounded-md text-sm transition duration-300
+          <%= currentPage === 'host-Tables' 
+          ? 'bg-blue-500 text-white' 
+          : 'bg-white text-gray-200' 
+        %> 
+        hover:bg-blue-600 hover:text-white">Host Tables</a>
+      </li>
+      <li>
+        <a href="/host/add-branch" class="py-2 px-4 rounded-md text-sm transition duration-300 
+        <%= currentPage === 'addBranch' 
+        ? 'bg-blue-500 text-white' 
+        : 'bg-white text-gray-200' 
+      %> 
+      hover:bg-blue-600 hover:text-white">New Branch</a>
+      </li>
+      <li>
+        <a href="/host/branch-list" class="py-2 px-4 rounded-md text-sm transition duration-300 
+        <%= currentPage === 'branch-list' 
+        ? 'bg-blue-500 text-white' 
+        : 'bg-white text-gray-200' 
+      %> 
+      hover:bg-blue-600 hover:text-white">Branch List</a>
+      </li>
+      <% } %>
+      <li>
+        <% if (!isLoggedIn) { %>
+          <a href="/signup" class="py-2 px-4 rounded-md text-sm transition duration-300 
+          <%= currentPage === 'Signup' 
+          ? 'bg-blue-500 text-white' 
+          : 'bg-white text-gray-200' 
+        %> 
+        hover:bg-blue-600 hover:text-white">Sign Up</a>
+
+          <a href="/login" class="py-2 px-4 rounded-md text-sm transition duration-300 
+          <%= currentPage === 'Login' 
+          ? 'bg-blue-500 text-white' 
+          : 'bg-white text-gray-200' 
+        %> 
+        hover:bg-blue-600 hover:text-white">Login</a>
+      <% } else { %>
+        <li>
+          <form action="/logout" method="POST">
+              <button type="submit" class="bg-red-600 hover:bg-red-700 text-white">
+                  Logout
+              </button>
+          </form>
+          </li>
+      <% } %>
+      </li>
+
+      </ul>
+  </nav>
+</header>
